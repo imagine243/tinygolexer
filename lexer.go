@@ -1,18 +1,22 @@
 package tinygolexer
 
+import "fmt"
+
+// Lexer 词法分析器
 type Lexer struct {
 	src    []rune
-	tokens *[]Token
+	tokens []Token
 	index  int
 }
 
-func (self *Lexer) Lex(s string) {
-	self.src = []rune(s)
-	self.tokens = new([]Token)
+// Lex 词法分析
+func (lexer *Lexer) Lex(s string) {
+	lexer.src = []rune(s)
+	lexer.index = 0
+	fmt.Println(lexer.src)
 }
-func NewLexer() *Lexer {
 
-	return &Lexer{
-		index: 0,
-	}
+// NewLexer 构造词法分析器
+func NewLexer() *Lexer {
+	return &Lexer{}
 }
