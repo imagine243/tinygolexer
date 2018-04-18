@@ -16,6 +16,27 @@ func (lexer *Lexer) Lex(s string) {
 	fmt.Println(lexer.src)
 }
 
+func (lexer *Lexer) Index() int {
+
+	return lexer.index
+}
+
+func (lexer *Lexer) Count() int {
+	return len(lexer.src)
+}
+
+func (lexer *Lexer) Peek(offset int) rune {
+	if lexer.index+offset >= len(lexer.src) {
+		return 0
+	}
+
+	return lexer.src[lexer.index+offset]
+}
+
+func (lexer *Lexer) ConsumeMulti(mul int) {
+	lexer.index += mul
+}
+
 // NewLexer 构造词法分析器
 func NewLexer() *Lexer {
 	return &Lexer{}
