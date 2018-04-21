@@ -29,3 +29,9 @@ func (matcher *MatcherKey) Match(lexer *Lexer) (*Token, error) {
 func (matcher *MatcherKey) String() string {
 	return fmt.Sprintf("%s('%s')", reflect.TypeOf(matcher).Elem().Name(), string(matcher.key))
 }
+
+func NewMatcherKey(k string) matcher {
+	return &MatcherKey{
+		key: []rune(k),
+	}
+}
