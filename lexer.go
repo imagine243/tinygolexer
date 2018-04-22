@@ -58,6 +58,7 @@ func (lexer *Lexer) PeekChunk(begin int, end int) []rune {
 		var temp []rune
 		return temp
 	}
+	fmt.Printf("begin %d end %d\n", begin, end)
 	return lexer.src[begin:end]
 }
 

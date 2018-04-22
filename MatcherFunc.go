@@ -30,6 +30,8 @@ func (matcher *MatcherFunc) Match(lexer *Lexer) (*Token, error) {
 	var index int
 	if matcherSign(lexer, index, matcher.leftSign) {
 		index += len(matcher.leftSign)
+	} else {
+		return nil, nil
 	}
 
 	for !matcherSign(lexer, index, matcher.rightSign) {
@@ -38,7 +40,12 @@ func (matcher *MatcherFunc) Match(lexer *Lexer) (*Token, error) {
 			return nil, nil
 		}
 	}
-	token := NewToken(matcher, lexer, string(lexer.PeekChunk(lexer.Index()+len(matcher.leftSign), lexer.Index()+index-len(matcher.rightSign))), string(lexer.PeekChunk(lexer.Index(), lexer.Index()+index)))
+	index += len(matcher.rightSign)
+	fmt.Printf("lexer index : %d %d \n", lexer.Index(), index)
+	v := string(lexer.PeekChunk(lexer.Index()+len(matcher.leftSign), lexer.Index()+index-len(matcher.rightSign)))
+	r := string(lexer.PeekChunk(lexer.Index(), lexer.Index()+index))
+	fmt.Printf("value %s raw %s \n", v, r)
+	token := NewToken(matcher, lexer, v, r)
 	lexer.ConsumeMulti(index)
 	return token, nil
 }

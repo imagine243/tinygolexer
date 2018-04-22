@@ -1,14 +1,18 @@
 package tinygolexer
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestParser(t *testing.T) {
 	l := NewLexer()
 	l.AddMatcher(NewMatcherWhiteSpace())
 	l.AddMatcher(NewMatcherKey("%%"))
-	l.Lex("%% %%")
+	l.AddMatcher(NewMatcherFunc("{", "}"))
+	l.AddMatcher(NewMatcherFunc("\"", "\""))
+	l.Lex("%% \"server\"        {return SERVER;} %%")
 
-	if len(l.tokens) == 3 {
+	if len(l.tokens) == 7 {
 		t.Log(l.tokens)
 		t.FailNow()
 	}

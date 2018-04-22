@@ -7,7 +7,7 @@ type MatcherWhiteSpace struct {
 }
 
 func isWhiteSpace(r rune) bool {
-	return r == ' ' || r == '\t'
+	return r == ' ' || r == '\t' || r == '\n'
 
 }
 
