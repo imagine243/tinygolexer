@@ -1,5 +1,5 @@
 package tinygolexer
 
-func Generate(token *Token) {
+func Generate(token []Token) {
 
 }
