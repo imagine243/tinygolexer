@@ -19,10 +19,16 @@ func (lexer *Lexer) Lex(s string) {
 	lexer.index = 0
 	fmt.Println(lexer.src)
 
+	var wordIndex int
 	for lexer.Index() < lexer.Count() {
 		for _, m := range lexer.matchers {
 			token, err := m.Match(lexer)
 			if token != nil {
+				if wordIndex > 0 {
+					wordToken := NewToken(nil, lexer, string(lexer.PeekChunk(lexer.Index()-wordIndex, lexer.Index()-1)), "")
+					lexer.tokens = append(lexer.tokens, *wordToken)
+					wordIndex = 0
+				}
 				lexer.tokens = append(lexer.tokens, *token)
 			}
 
@@ -30,6 +36,9 @@ func (lexer *Lexer) Lex(s string) {
 				log.Fatal(err)
 			}
 		}
+		wordIndex++
+		lexer.ConsumeMulti(1)
+
 	}
 }
 

@@ -8,10 +8,13 @@ type Token struct {
 }
 
 func NewToken(m matcher, lexer *Lexer, v string, r string) *Token {
+	if r == "" {
+		r = v
+	}
 	self := Token{
 		value: v,
 		raw:   r,
-		pos:   lexer.Count(),
+		pos:   lexer.Index(),
 		m:     m,
 	}
 

@@ -1,4 +1,5 @@
 %%
 "server"        {return SERVER;}
 $[\s\t\r\n]$      {/* ignore */}
+ssss
 %%
