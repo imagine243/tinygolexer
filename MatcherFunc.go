@@ -43,9 +43,9 @@ func (matcher *MatcherFunc) Match(lexer *Lexer) (*Token, error) {
 	index += len(matcher.rightSign)
 	fmt.Printf("lexer index : %d %d \n", lexer.Index(), index)
 	v := string(lexer.PeekChunk(lexer.Index()+len(matcher.leftSign), lexer.Index()+index-len(matcher.rightSign)))
-	r := string(lexer.PeekChunk(lexer.Index(), lexer.Index()+index))
-	fmt.Printf("value %s raw %s \n", v, r)
-	token := NewToken(matcher, lexer, v, r)
+	r := lexer.PeekChunk(lexer.Index(), lexer.Index()+index)
+	fmt.Printf("value %s raw %v \n", v, r)
+	token := NewToken(matcher, lexer.Index(), index, v, r)
 	lexer.ConsumeMulti(index)
 	return token, nil
 }

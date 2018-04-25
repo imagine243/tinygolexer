@@ -23,7 +23,7 @@ func (matcher *MatcherKey) Match(lexer *Lexer) (*Token, error) {
 	}
 
 	lexer.ConsumeMulti(index)
-	return NewToken(matcher, lexer, string(matcher.key), ""), nil
+	return NewToken(matcher, lexer.Index(), index, string(matcher.key), lexer.PeekChunk(lexer.Index()-index, lexer.Index())), nil
 }
 
 func (matcher *MatcherKey) String() string {

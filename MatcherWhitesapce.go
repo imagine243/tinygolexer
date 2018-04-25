@@ -26,7 +26,7 @@ func (matcher *MatcherWhiteSpace) Match(lexer *Lexer) (*Token, error) {
 	}
 
 	lexer.ConsumeMulti(index)
-	return NewToken(matcher, lexer, " ", ""), nil
+	return NewToken(matcher, lexer.Index(), index, " ", lexer.PeekChunk(lexer.Index()-index, lexer.Index())), nil
 }
 
 func (matcher *MatcherWhiteSpace) String() string {
