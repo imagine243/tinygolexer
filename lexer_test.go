@@ -12,7 +12,7 @@ func TestParser(t *testing.T) {
 	l.AddMatcher(NewMatcherFunc("{", "}"))
 	l.AddMatcher(NewMatcherFunc("\"", "\""))
 	l.AddMatcher(NewMatcherFunc("$", "$"))
-	dat, err := ioutil.ReadFile("./test.txt")
+	dat, err := ioutil.ReadFile("./testl.txt")
 	if err != nil {
 		panic(err)
 	}
