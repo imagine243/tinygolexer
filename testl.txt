@@ -11,6 +11,6 @@
 "{"             {return OP;}
 "}"             {return CP;}
 [\s\t\r\n]      {/* ignore */}
-[A-Za-z0-9\.\/:_]+              {printf("%s \n", yytext); return VALUE}
+[A-Za-z0-9\.\/:_]+              {printf("%s \n", yytext); return VALUE;}
 
 %%

@@ -1,5 +1,9 @@
 package tinygolexer
 
+import (
+	"fmt"
+)
+
 type Token struct {
 	value  interface{}
 	raw    []rune
@@ -18,4 +22,11 @@ func NewToken(m matcher, pos int, length int, v string, r []rune) *Token {
 	}
 
 	return &self
+}
+
+func (t *Token) String() string {
+	if t == nil {
+		return ""
+	}
+	return fmt.Sprintf("pos : %d length : %d value : %s raw : %v \n", t.pos, t.length, t.value, t.raw)
 }

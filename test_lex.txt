@@ -1,0 +1,6 @@
+%%
+"%%"            {return SPLIT;}
+"""             {return KEY_SIGH;}
+"{"             {return FUNC_OP;}
+"}"             {return FUNC_CP;}
+%%

@@ -5,6 +5,26 @@ import (
 	"testing"
 )
 
+func TestGenerate(t *testing.T) {
+	l := NewLexer()
+	l.AddMatcher(NewMatcherWhiteSpace())
+	l.AddMatcher(NewMatcherKey("%%"))
+	l.AddMatcher(NewMatcherKey(":"))
+	l.AddMatcher(NewMatcherKey("|"))
+	l.AddMatcher(NewMatcherKey(";"))
+	l.AddMatcher(NewMatcherFunc("{", "}"))
+	dat, err := ioutil.ReadFile("./testy.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	testStr := string(dat)
+	l.Lex(testStr)
+
+	Generate(l.tokens)
+	t.FailNow()
+}
+
 func TestParser(t *testing.T) {
 	l := NewLexer()
 	l.AddMatcher(NewMatcherWhiteSpace())
@@ -16,6 +36,26 @@ func TestParser(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
+	testStr := string(dat)
+	l.Lex(testStr)
+
+	t.Log(l.tokens)
+	t.FailNow()
+}
+
+func TestParserY(t *testing.T) {
+	l := NewLexer()
+	l.AddMatcher(NewMatcherWhiteSpace())
+	l.AddMatcher(NewMatcherKey("%%"))
+	l.AddMatcher(NewMatcherKey(":"))
+	l.AddMatcher(NewMatcherKey("|"))
+	l.AddMatcher(NewMatcherKey(";"))
+	l.AddMatcher(NewMatcherFunc("{", "}"))
+	dat, err := ioutil.ReadFile("./testy.txt")
+	if err != nil {
+		panic(err)
+	}
+
 	testStr := string(dat)
 	l.Lex(testStr)
 
