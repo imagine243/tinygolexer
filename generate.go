@@ -7,7 +7,6 @@ package tinygolexer
 
 import (
 	"fmt"
-	"reflect"
 )
 
 `
