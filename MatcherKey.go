@@ -35,3 +35,9 @@ func NewMatcherKey(k string) matcher {
 		key: []rune(k),
 	}
 }
+
+func NewMatcherKeyAndId(k string, id int) matcher {
+	matcher := NewMatcherKey(k)
+	matcher.SetId(id)
+	return matcher
+}

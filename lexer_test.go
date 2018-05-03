@@ -5,15 +5,20 @@ import (
 	"testing"
 )
 
+const (
+	SPLIT = iota
+)
+
 func TestGenerate(t *testing.T) {
 	l := NewLexer()
 	l.AddMatcher(NewMatcherWhiteSpace())
-	l.AddMatcher(NewMatcherKey("%%"))
+	l.AddMatcher(NewMatcherKeyAndId("%%", SPLIT))
 	l.AddMatcher(NewMatcherKey(":"))
 	l.AddMatcher(NewMatcherKey("|"))
 	l.AddMatcher(NewMatcherKey(";"))
 	l.AddMatcher(NewMatcherFunc("{", "}"))
-	dat, err := ioutil.ReadFile("./testy.txt")
+	l.AddMatcher(NewMatcherFunc("%{", "}%"))
+	dat, err := ioutil.ReadFile("./testl.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -21,7 +26,7 @@ func TestGenerate(t *testing.T) {
 	testStr := string(dat)
 	l.Lex(testStr)
 
-	Generate(l.tokens)
+	Generate("testl", l.tokens)
 	t.FailNow()
 }
 
